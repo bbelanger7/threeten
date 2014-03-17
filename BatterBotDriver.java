@@ -344,7 +344,7 @@ public class BatterBotDriver
 	
 	public static void main(String[] args)
 	{	
-		BatterBotDriver bat = new BatterBotDriver(new IOconsole());
+		BatterBotDriver bat = new BatterBotDriver(new IO());
 		
 		bat.setup();
 		try
