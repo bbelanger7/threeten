@@ -1,21 +1,20 @@
-import java.util.Scanner;
+//import java.util.Scanner;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
 /**
- * Implementation of the IO interface.  It might even work.
- * Special thanks go to this site, because that's where
- * quite a bit of this code is from:
- * 
- * 
+ * Implementation of the IO interface.
+ * Most of the GUI code was adapted from here:
+ * http://docs.oracle.com/javase/tutorial/uiswing/examples/components/TextDemoProject/src/components/TextDemo.java
  * 
  * @author Benjamin
  */
 public class IO extends JPanel implements IOInterface, ActionListener
 {
-
-    //private Scanner askUser = new Scanner(System.in);
+	//Because Eclipse was complaining
+	private static final long serialVersionUID = 1L;
+	//private Scanner askUser = new Scanner(System.in);
     protected JTextField textField;
     protected JTextArea textArea;
     private final static String newline = "\n";
@@ -94,7 +93,7 @@ public class IO extends JPanel implements IOInterface, ActionListener
         c.weighty = 1.0;
         add(scrollPane, c);
         
-        JFrame frame = new JFrame("TextDemo");
+        JFrame frame = new JFrame("BatBot");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  
         //Add contents to the window.
@@ -126,7 +125,7 @@ public class IO extends JPanel implements IOInterface, ActionListener
     
     public String read()
     {
-    	while(true) //Spin until we recieve a signal from the event
+    	while(true) //Spin until we receive a signal from the event
     	{
     		System.out.println("");
     		//if (clearToRead == true)

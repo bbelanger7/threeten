@@ -6,6 +6,7 @@
  * Batter Bot Response Template files.
  * 
  * @author Yasha
+ * @author Benjamin
  * 
  */
 public class BatterBotDriver 
@@ -40,8 +41,8 @@ public class BatterBotDriver
 		
 		while(true)
 		{
-			//This is expected to block waiting for input
-			//But input is constant.  What do?
+			//This is expected to block waiting for input- it does so in the IO class using an inf. loop though
+			//It fills up the console, but since it's useless anyways I don't think it's that big a deal
 			input = IO.read();
 			
 			//Decode the user input into keywords
@@ -345,6 +346,8 @@ public class BatterBotDriver
 	
 	public static void main(String[] args)
 	{	
+		//For WordNet
+		//System.setProperty("wordnet.database.dir", "C:\Program Files (x86)\WordNet\2.1\dict");
 		BatterBotDriver bat = new BatterBotDriver(new IO());
 		
 		bat.setup();
