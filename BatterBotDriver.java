@@ -41,7 +41,8 @@ public class BatterBotDriver
 		while(true)
 		{
 			//This is expected to block waiting for input
-			input = IO.read(); 
+			//But input is constant.  What do?
+			input = IO.read();
 			
 			//Decode the user input into keywords
 			KeyWordList keys = LP.extractKeyWords(input);

@@ -19,6 +19,8 @@ public interface IOInterface
 	 * This method will block if the next user input
 	 * is not ready.
 	 * 
+	 * Oh, no it won't.
+	 * 
 	 * @return Returns the next user input as a String.
 	 */
 	public String read();

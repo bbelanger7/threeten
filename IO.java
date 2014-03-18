@@ -15,10 +15,11 @@ import java.awt.event.*;
 public class IO extends JPanel implements IOInterface, ActionListener
 {
 
-    private Scanner askUser = new Scanner(System.in);
+    //private Scanner askUser = new Scanner(System.in);
     protected JTextField textField;
     protected JTextArea textArea;
     private final static String newline = "\n";
+    private boolean clearToRead = false;
     //private JPanel panel;
     
     //When I used the console, la di da
@@ -109,10 +110,11 @@ public class IO extends JPanel implements IOInterface, ActionListener
     {
     	//Grab the text from the text field
     	String text = textField.getText();
-    	//Send it as a read event?
-    	read();
+    	//Unblock that reader
+    	clearToRead = true;
+    	
     	//Paste it to the history
-        textArea.append(text + newline);
+        textArea.append("User: " + text + newline);
         //Select everything from the text field
         textField.selectAll();
          
@@ -121,10 +123,23 @@ public class IO extends JPanel implements IOInterface, ActionListener
         textArea.setCaretPosition(textArea.getDocument().getLength());
     }
     
+    
     public String read()
     {
-    	//if (textField.getText() != "")
-    		return textField.getText();
+    	while(true) //Spin until we recieve a signal from the event
+    	{
+    		System.out.println("");
+    		//if (clearToRead == true)
+    		//{
+    		//	clearToRead = false;
+    		//	break;
+    		//I don't want this to run UNLESS it was called by actionperformed
+    		//return textField.getText();
+    		if (clearToRead == true)
+    			break;
+    	}
+    	clearToRead = false;
+    	return textField.getText();
     }
     
 }
