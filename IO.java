@@ -127,7 +127,7 @@ public class IO extends JPanel implements IOInterface, ActionListener
     {
     	while(true) //Spin until we receive a signal from the event
     	{
-    		System.out.println("");
+    		System.out.println("");  //The console wants this for some reason
     		//if (clearToRead == true)
     		//{
     		//	clearToRead = false;
@@ -139,6 +139,7 @@ public class IO extends JPanel implements IOInterface, ActionListener
     	}
     	clearToRead = false;
     	return textField.getText();
+    	
     }
     
 }

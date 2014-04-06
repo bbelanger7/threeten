@@ -9,6 +9,14 @@ import java.util.Random;
  * @author Bryce
  * @author Yasha
  * 
+ * This part of the system also implements the Wikipedia API if certain flags are set.
+ * If the flag is set in the response template, the program will call up the appropriate response.
+ * 
+ * All it has to do, of course, is figure out what that response is going to be.
+ * 
+ * @author Benjamin
+ * 
+ * 
  */
 public class ResponseBuilder implements ResponseBuilderInterface 
 {
@@ -52,6 +60,14 @@ public class ResponseBuilder implements ResponseBuilderInterface
 						
 		}
 		return response;
+	}
+	
+	@Override
+	public String fromWiki(ResponseTemplate template, KeyWordList keys)
+	{
+		//This calls the Wikipedia API for a specific topic.
+	
+		return "This is supposed to be from the wiki.";
 	}
 
 	/**

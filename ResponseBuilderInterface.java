@@ -17,5 +17,13 @@ public interface ResponseBuilderInterface extends WordBuckets, SharedData
 	 * @return The batterbot's response as a String. 
 	 */
 	public String buildResponse(ResponseTemplate template, KeyWordList keys);
-
+	
+	/**
+	 * This uses the Wikipedia API.
+	 * 
+	 * @param I don't know.
+	 * @return The Wikipedia (formatted) response as a String. 
+	 */
+	
+	public String fromWiki(ResponseTemplate template, KeyWordList keys);
 }

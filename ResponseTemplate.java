@@ -61,6 +61,9 @@ public class ResponseTemplate implements ResponseTemplateInterface, SharedData
 	 * Determines if this response is to end the conversation. 
 	 */
 	public boolean valediction = false;
+	
+	//Determines if this response gets to call Wikipedia.
+	public boolean needsWiki = false;
 
 	
 	public static KeyWordList fullKeys = null;
@@ -101,6 +104,9 @@ public class ResponseTemplate implements ResponseTemplateInterface, SharedData
 	public String[] keys = null;
 	
 	public String memEntry = null;
+	
+	//Each response template I determine should have a Wiki entry needs a corresponding term the builder searches for.
+	public String wikiTerm = null;
 	
 	/**
 	 * Constructor to build a response template.
@@ -157,6 +163,16 @@ public class ResponseTemplate implements ResponseTemplateInterface, SharedData
 	public boolean isValediction() 
 	{
 		return valediction; 
+	}
+	
+	public boolean needsWiki()
+	{
+		return needsWiki;
+	}
+	
+	public String wikiTerm()
+	{
+		return wikiTerm;
 	}
 	
 	/**

@@ -54,8 +54,18 @@ public class BatterBotDriver
 			//Select the next response template
 			template = RS.selectTemplate(keys);
 			
-			//Build the response from template
-			String response = RB.buildResponse(template, keys);
+			String response = null;
+			
+			//TODO: Let the system append a witty response after getting from the Wiki.
+			if(template.needsWiki)
+			{
+				response = RB.fromWiki(template, keys);
+			}
+			else
+			{
+			//Build the response from template as normal
+				response = RB.buildResponse(template, keys);
+			}
 			
 			//Print the next response
 			IO.print(response);
@@ -215,19 +225,19 @@ public class BatterBotDriver
 				
 				ResponseTemplate response23 = new ResponseTemplate(sentence23, bucket23, keys23);
 				
-				String[] sentence24 = {"The league of shadows is an acient cult. Bent on wiping Gotham off the map.  They are led by Raz Al-Gul"};
+				String[] sentence24 = {"The League of Shadows is an acient cult. Bent on wiping Gotham off the map.  They are led by Raz Al-Gul"};
 				String[][] bucket24 = null;
 				String[] keys24 = {"league of shadow"};
 				
 				ResponseTemplate response24 = new ResponseTemplate(sentence24, bucket24, keys24);
 				
-				String[] sentence25 = {"Raz Al-Gul is the leader of the League of , and one of my many enemies. He is thousands of years old. He gets his youth from the legendary Lazarus Pools"};
+				String[] sentence25 = {"Raz Al-Gul is the leader of the League of Shadows, and one of my many enemies. He is thousands of years old. He gets his youth from the legendary Lazarus Pools"};
 				String[][] bucket25 = null;
 				String[] keys25 = {"raz","al-gul","leader"};
 				
 				ResponseTemplate response25 = new ResponseTemplate(sentence25, bucket25, keys25);
 				
-				String[] sentence26 = {"The lazarus pools are the source of the legend of the fountain of youth. They're one and the same, and Raz Al-gul is the only person who knows how to use them."};
+				String[] sentence26 = {"The Lazarus pools are the source of the legend of the fountain of youth. They're one and the same, and Raz Al-Gul is the only person who knows how to use them."};
 				String[][] bucket26 = null;
 				String[] keys26 = {"lazarus","pools"};
 				
@@ -235,9 +245,13 @@ public class BatterBotDriver
 				
 				String[] sentence27 = {"The Joker is a psychopathic clown who just wants to watch the world burn. He is my oldest and most dangerous enemy!"};
 				String[][] bucket27 = null;
-				String[] keys27 = {"joker"};
+				String[] keys27 = {"joker"};		
 				
 				ResponseTemplate response27 = new ResponseTemplate(sentence27, bucket27, keys27);
+				//Test for the Wiki.
+				response27.needsWiki = true;
+				response27.wikiTerm = "Joker+(comic)";
+				
 				
 				String[] sentence28 = {"Mr. Cobblepot, aka the Penguin, is a deranged, mutated man who blames the rest of the world for his misfortune. We have fought many times."};
 				String[][] bucket28 = null;
@@ -341,6 +355,22 @@ public class BatterBotDriver
 				String[] keys44 = {"talk about?"};
 				
 				ResponseTemplate response44 = new ResponseTemplate(sentence44, bucket44, keys44);
+				
+				
+				//No, this doesn't *really* need to be here, but why not?
+				String[] sentence45 = {"YOU ARE FINED ONE CREDIT FOR VIOLATION OF THE VERBAL MORALITY STATUTE.  GOODBYE."};
+				String[][] bucket45 = null;
+				String[] keys45 = {"fuck, shit, damn, hell, ass, dick, bitch, bullshit"};
+				
+				ResponseTemplate response45 = new ResponseTemplate(sentence45, bucket45, keys45);
+				response45.valediction = true;
+				
+				
+				String[] sentence46 = {"You shouldn't see this."};
+				String[][] bucket46 = null;
+				String[] keys46 = {"wikitest"};
+				ResponseTemplate response46 = new ResponseTemplate(sentence46, bucket46, keys46);
+				response46.needsWiki = true;
 				
 	}
 	

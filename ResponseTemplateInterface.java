@@ -35,6 +35,9 @@ public interface ResponseTemplateInterface extends WordBuckets
 	 */
 	public abstract boolean isValediction();
 	
+	
+	public abstract boolean needsWiki();
+	
 	/**
 	 * Puts the response from the user into the corresponding memory location if applicable. 
 	 * 
