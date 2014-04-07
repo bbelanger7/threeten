@@ -17,6 +17,10 @@ public class BatterBotDriver
 	private LanguageProcessorInterface LP = new LanguageProcessor();
 	private ResponseSelectorInterface RS = new ResponseSelector();
 	private ResponseBuilderInterface RB = new ResponseBuilder();
+	//This way, the YAnswers! implementation makes sense to have.
+	private String botMode = "batman";
+	
+	
 	
 	/**
 	 * Basic constructor which sets up the IO class.
@@ -44,9 +48,18 @@ public class BatterBotDriver
 		
 		while(true)
 		{
-			//This is expected to block waiting for input- it does so in the IO class using an inf. loop though
-			//It fills up the console, but since it's useless anyways I don't think it's that big a deal
+			//This is expected to block waiting for input, but it doesn't because I don't understand how to semaphore.
 			input = IO.read();
+			
+			/**
+			 * Need to do different things depending on what mode the bot is in.
+			 * Starting mode is, of course, Batman.
+			 * If you say a certain line, 'I have a question' (or the like), the bot's mode will switch
+			 * and it will redirect the things you say to YAnswers.
+			 * 
+			 * Otherwise, it will take the normal path and use the language processors, etc.
+			 */
+			
 			
 			//Decode the user input into keywords
 			KeyWordList keys = LP.extractKeyWords(input);
@@ -58,6 +71,7 @@ public class BatterBotDriver
 			template = RS.selectTemplate(keys);
 			
 			String response = null;
+			
 			
 			//TODO: Let the system append a witty response after getting from the Wiki.
 			if(template.needsWiki)
@@ -82,7 +96,7 @@ public class BatterBotDriver
 	
 	public void setup()
 	{
-		//This is just an example of what a response template definition will look like
+		//Response templates declared here.
 		
 				String[] sentence0 = {"I'm sorry, I don't understand....my time is precious. We could talk about"};
 				String[][] bucket0 = {{" Superman"," Wonder Woman"," The Justice League"," Green Lantern"," The Flash"," my enemies"}};
@@ -361,11 +375,12 @@ public class BatterBotDriver
 				
 				
 				
-				String[] sentence46 = {"You shouldn't see this."};
-				String[][] bucket46 = null;
-				String[] keys46 = {"wikitest"};
+				String[] sentence45 = {"You shouldn't see this."};
+				String[][] bucket45 = null;
+				String[] keys45 = {"yahootest"};
 				ResponseTemplate response46 = new ResponseTemplate(sentence46, bucket46, keys46);
-				response46.needsWiki = true;
+				//response46.needsAnswer = true;
+				
 				
 				
 	}
@@ -379,7 +394,7 @@ public class BatterBotDriver
 		bat.setup();
 		try
 		{
-		bat.cycle();
+			bat.cycle();
 		}
 		catch(Exception e)
 		{
