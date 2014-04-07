@@ -32,7 +32,9 @@ public class IO extends JPanel implements IOInterface, ActionListener
         return read;
     }
 	*/
-    
+    /**
+     * 
+     */
     public void print (String response)
     {
     	//Old console code
@@ -104,7 +106,10 @@ public class IO extends JPanel implements IOInterface, ActionListener
         frame.setVisible(true);    	
     }
     
-    //So when the 'Enter' key is pressed
+    /**
+     * When the user presses Enter (the action we're listening for), clear the reader to return something.
+     * @param Event [created by pressing 'Enter']
+     */
     public void actionPerformed(ActionEvent evt)
     {
     	//Grab the text from the text field
@@ -122,7 +127,9 @@ public class IO extends JPanel implements IOInterface, ActionListener
         textArea.setCaretPosition(textArea.getDocument().getLength());
     }
     
-    
+    /**
+     * Reads from the console when the user presses Enter.
+     */
     public String read()
     {
     	while(true) //Spin until we receive a signal from the event

@@ -1,9 +1,12 @@
+import java.io.IOException;
+
 /**
  * Interface to define the method signatures of the ResponseBuilder.
  * 
  * Builds the next response of the batterbot. 
  * 
  * @author Yasha
+ * @author Benjamin
  *
  */
 public interface ResponseBuilderInterface extends WordBuckets, SharedData
@@ -21,9 +24,11 @@ public interface ResponseBuilderInterface extends WordBuckets, SharedData
 	/**
 	 * This uses the Wikipedia API.
 	 * 
-	 * @param I don't know.
+	 * @param template ResponseTemplateInterface that needs to be filled in. 
+	 * Remember, we don't need the keys for this one. 
 	 * @return The Wikipedia (formatted) response as a String. 
+	 * @throws IOException 
 	 */
 	
-	public String fromWiki(ResponseTemplate template, KeyWordList keys);
+	public String fromWiki(ResponseTemplate template) throws IOException;
 }

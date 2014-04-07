@@ -1,4 +1,13 @@
 import java.util.Random;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+
+import org.json.JSONObject;
 
 /**
  * Given a Response Template as input, the Response Builder fills in the canned
@@ -62,12 +71,49 @@ public class ResponseBuilder implements ResponseBuilderInterface
 		return response;
 	}
 	
+	/**
+	 * This method takes in a response template (and a list of keys, but who cares about those?).
+	 * It then calls Wikipedia's web API, which returns more information when it is called for.
+	 * 
+	 * And I could care less about the keys.
+	 */
 	@Override
-	public String fromWiki(ResponseTemplate template, KeyWordList keys)
+	public String fromWiki(ResponseTemplate template) throws IOException
 	{
-		//This calls the Wikipedia API for a specific topic.
-	
-		return "This is supposed to be from the wiki.";
+		//I need the intro for the specific page specified by wikiTerm().
+		
+		String s = null;
+		
+		String URLSearch = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exlimit=10&exintro=&explaintext=&titles=";
+		
+		//important part: getting definitions and information here.
+		String totalURL = URLSearch + URLEncoder.encode(template.wikiTerm(), "UTF-8");
+		URL myUrl2 = new URL(totalURL);
+		
+		InputStream is2 = myUrl2.openStream();
+		BufferedReader streamReader = new BufferedReader(new InputStreamReader(is2, "UTF-8"));
+		//StringBuilder responseStrBuilder = new StringBuilder();
+		
+		String inputStr;
+		String input = "";
+		while((inputStr = streamReader.readLine()) != null){
+			input += inputStr;
+		}
+		
+		JSONObject json = new JSONObject(input);
+		JSONObject query = json.getJSONObject("query");
+		JSONObject pages = query.getJSONObject("pages");
+	    String[] keys = JSONObject.getNames(pages);
+		JSONObject nestedObject = pages.getJSONObject(keys[0]);
+		
+		
+		s = nestedObject.getString("extract");
+		if(s == null)
+			return "Nothing here but us chickens.";
+		return s;
+		
+		//Testing, again
+		//return totalURL;
 	}
 
 	/**

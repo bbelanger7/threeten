@@ -105,7 +105,9 @@ public class ResponseTemplate implements ResponseTemplateInterface, SharedData
 	
 	public String memEntry = null;
 	
-	//Each response template I determine should have a Wiki entry needs a corresponding term the builder searches for.
+	/**
+	 * Each response template I determine should have a Wiki entry needs a corresponding term the builder searches for.
+	 */
 	public String wikiTerm = null;
 	
 	/**

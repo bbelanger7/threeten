@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 /**
  * We use a driver class BatterBotDriver which contains all of the components
  * needed for the Chatter Bot. This class also stores the main function cycle()
@@ -33,8 +35,9 @@ public class BatterBotDriver
 	 * handles all of the IO operations, message decoding, response building, and will
 	 * terminate naturally when the batterbot decides that conversation is over and sends
 	 * a valediction.
+	 * @throws IOException 
 	 */
-	public void cycle()
+	public void cycle() throws IOException
 	{
 		String input;
 		ResponseTemplate template = null;
@@ -59,7 +62,7 @@ public class BatterBotDriver
 			//TODO: Let the system append a witty response after getting from the Wiki.
 			if(template.needsWiki)
 			{
-				response = RB.fromWiki(template, keys);
+				response = RB.fromWiki(template);
 			}
 			else
 			{
@@ -70,7 +73,7 @@ public class BatterBotDriver
 			//Print the next response
 			IO.print(response);
 			
-			//Checks if the batterbot intends to end the conversation.
+			//Checks if the response ends the conversation.
 			if(template.isValediction())
 				break;
 		}
@@ -248,9 +251,9 @@ public class BatterBotDriver
 				String[] keys27 = {"joker"};		
 				
 				ResponseTemplate response27 = new ResponseTemplate(sentence27, bucket27, keys27);
-				//Test for the Wiki.
+				//Test for the wiki.
 				response27.needsWiki = true;
-				response27.wikiTerm = "Joker+(comic)";
+				response27.wikiTerm = "Joker (comics)";
 				
 				
 				String[] sentence28 = {"Mr. Cobblepot, aka the Penguin, is a deranged, mutated man who blames the rest of the world for his misfortune. We have fought many times."};
@@ -357,20 +360,13 @@ public class BatterBotDriver
 				ResponseTemplate response44 = new ResponseTemplate(sentence44, bucket44, keys44);
 				
 				
-				//No, this doesn't *really* need to be here, but why not?
-				String[] sentence45 = {"YOU ARE FINED ONE CREDIT FOR VIOLATION OF THE VERBAL MORALITY STATUTE.  GOODBYE."};
-				String[][] bucket45 = null;
-				String[] keys45 = {"fuck, shit, damn, hell, ass, dick, bitch, bullshit"};
-				
-				ResponseTemplate response45 = new ResponseTemplate(sentence45, bucket45, keys45);
-				response45.valediction = true;
-				
 				
 				String[] sentence46 = {"You shouldn't see this."};
 				String[][] bucket46 = null;
 				String[] keys46 = {"wikitest"};
 				ResponseTemplate response46 = new ResponseTemplate(sentence46, bucket46, keys46);
 				response46.needsWiki = true;
+				
 				
 	}
 	
