@@ -3,6 +3,7 @@
  * and the user.
  * 
  * @author Yasha
+ * @author Benjamin
  *
  */
 public interface IOInterface 
@@ -16,11 +17,7 @@ public interface IOInterface
 	
 	/**
 	 * Used to read the user input to the batterbot.
-	 * This method will block if the next user input
-	 * is not ready.
-	 * 
-	 * Oh, no it won't.
-	 * 
+	 * This method doesn't currently block but I wish it did.
 	 * @return Returns the next user input as a String.
 	 */
 	public String read();
