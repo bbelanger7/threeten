@@ -64,6 +64,9 @@ public class ResponseTemplate implements ResponseTemplateInterface, SharedData
 	
 	//Determines if this response gets to call Wikipedia.
 	public boolean needsWiki = false;
+	
+	//Determines if this response triggers the bot's alternate mode
+	public boolean answerTrigger = false;
 
 	
 	public static KeyWordList fullKeys = null;
@@ -175,6 +178,11 @@ public class ResponseTemplate implements ResponseTemplateInterface, SharedData
 	public String wikiTerm()
 	{
 		return wikiTerm;
+	}
+	
+	public boolean answerTrigger()
+	{
+		return answerTrigger;
 	}
 	
 	/**

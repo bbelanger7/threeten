@@ -18,7 +18,7 @@ public class BatterBotDriver
 	private ResponseSelectorInterface RS = new ResponseSelector();
 	private ResponseBuilderInterface RB = new ResponseBuilder();
 	//This way, the YAnswers! implementation makes sense to have.
-	private Boolean ansMode = false;
+	private boolean ansMode = false;
 	
 	
 	
@@ -50,6 +50,8 @@ public class BatterBotDriver
 		{
 			//This is expected to block waiting for input, but it doesn't because I don't understand how to semaphore.
 			input = IO.read();
+			//Need to declare this up here
+			String response = null;
 			
 			/**
 			 * Need to do different things depending on what mode the bot is in.
@@ -59,8 +61,54 @@ public class BatterBotDriver
 			 * 
 			 * Otherwise, it will take the normal path and use the language processors, etc.
 			 */
+			//The past is over, John; now for something new and improved!
+			if (ansMode == true)
+			{
+				//Just check exit code directly
+				boolean containsQ = input.contains("quit");
+				boolean containsE = input.contains("exit");
+				
+				if (containsQ || containsE)
+				{
+					ansMode = false;
+					response = "Ok, let's get back to the matter at hand.";
+					//Or could do this with a template
+				}
+				else
+				{
+					response = RB.yAnswer(input) + "\nAnything else?";
+				}
+			}
+
+			else	//Following the main track
+			{
+				//Decode the user input into keywords
+				KeyWordList keys = LP.extractKeyWords(input);
+						
+				if(template != null)
+					template.processResponse(input, keys);
+						
+				//Select the next response template
+				template = RS.selectTemplate(keys);
+						
+				if(template.needsWiki)
+				{
+					response = RB.fromWiki(template);
+				}
+				else if(template.answerTrigger)
+				{
+					ansMode = true;
+					response = "You put me into Question Mode.  What's up?";
+				}
+				else  //OR	is it?
+				{
+					response = RB.buildResponse(template, keys);
+				}
+			}
+
 			
-			
+			//Old block
+			/*
 			//Decode the user input into keywords
 			KeyWordList keys = LP.extractKeyWords(input);
 			
@@ -80,7 +128,7 @@ public class BatterBotDriver
 			}
 			
 			//If the response triggers the YAnswers mode:
-			else if(template.switchAnswer)
+			else if(template.answerTrigger)
 			{
 				ansMode = true;
 			}
@@ -88,6 +136,7 @@ public class BatterBotDriver
 			//Build the response from template as normal; this will happen at all times.
 			//The bot should provide a commentary on the Wikipedia entry though it needn't be dynamic.
 			response = RB.buildResponse(template, keys);
+			*/  //END OF OLD BLOCK 
 			
 			//Print the next response
 			IO.print(response);
@@ -383,9 +432,7 @@ public class BatterBotDriver
 				String[][] bucket45 = null;
 				String[] keys45 = {"question"};
 				ResponseTemplate response45 = new ResponseTemplate(sentence45, bucket45, keys45);
-				//
-				
-				//response45.needsAnswer = true;
+				response45.answerTrigger = true;
 				
 				
 				

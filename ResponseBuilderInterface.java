@@ -31,4 +31,6 @@ public interface ResponseBuilderInterface extends WordBuckets, SharedData
 	 */
 	
 	public String fromWiki(ResponseTemplate template) throws IOException;
+	
+	public String yAnswer(String directQuestion) throws IOException;
 }

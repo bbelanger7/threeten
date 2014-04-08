@@ -38,6 +38,9 @@ public interface ResponseTemplateInterface extends WordBuckets
 	
 	public abstract boolean needsWiki();
 	
+	
+	public abstract boolean answerTrigger();
+	
 	/**
 	 * Puts the response from the user into the corresponding memory location if applicable. 
 	 * 
