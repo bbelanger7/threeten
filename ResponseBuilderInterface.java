@@ -32,5 +32,12 @@ public interface ResponseBuilderInterface extends WordBuckets, SharedData
 	
 	public String fromWiki(ResponseTemplate template) throws IOException;
 	
+	/**
+	 * This uses the Yahoo Answers API.
+	 * 
+	 * @param String directQuestion that the user asks the bot
+	 * @return The YAnswers response as a String.
+	 * @throws IOException 
+	 */
 	public String yAnswer(String directQuestion) throws IOException;
 }

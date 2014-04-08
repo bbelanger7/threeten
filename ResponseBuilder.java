@@ -22,10 +22,9 @@ import org.json.JSONTokener;
  * 
  * This part of the system also implements the Wikipedia API if certain flags are set.
  * If the flag is set in the response template, the program will call up the appropriate response.
+ * It also implements the Yahoo Answers API; which the main class only calls if it is in a specific mode.
  * 
- * All it has to do, of course, is figure out what that response is going to be.
- * 
- * @author Benjamin
+ * @author Benjamin.  I had some fantastic help from <redacted> and Barrett with the APIs.
  * 
  * 
  */
