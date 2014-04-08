@@ -67,6 +67,8 @@ public class BatterBotDriver
 				//Just check exit code directly
 				boolean containsQ = input.contains("quit");
 				boolean containsE = input.contains("exit");
+				//TODO: Add valediction support if the user says 'Bye'.
+				//TODO: Handle exceptions (if the system can't return anything).
 				
 				if (containsQ || containsE)
 				{
