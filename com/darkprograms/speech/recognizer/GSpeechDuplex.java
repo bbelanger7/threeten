@@ -49,7 +49,7 @@ public class GSpeechDuplex{
 	/**
 	 * User defined API-KEY
 	 */
-	private String API_KEY = "AIzaSyBucyqLQbbfpNGK0hp8QiByIzK92doQ2tU";
+	private String API_KEY = "";
 	
 	/**
 	 * User-defined language
