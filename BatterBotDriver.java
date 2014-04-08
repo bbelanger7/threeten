@@ -18,7 +18,7 @@ public class BatterBotDriver
 	private ResponseSelectorInterface RS = new ResponseSelector();
 	private ResponseBuilderInterface RB = new ResponseBuilder();
 	//This way, the YAnswers! implementation makes sense to have.
-	private String botMode = "batman";
+	private Boolean ansMode = false;
 	
 	
 	
@@ -78,11 +78,16 @@ public class BatterBotDriver
 			{
 				response = RB.fromWiki(template);
 			}
-			else
+			
+			//If the response triggers the YAnswers mode:
+			else if(template.switchAnswer)
 			{
-			//Build the response from template as normal
-				response = RB.buildResponse(template, keys);
+				ansMode = true;
 			}
+			
+			//Build the response from template as normal; this will happen at all times.
+			//The bot should provide a commentary on the Wikipedia entry though it needn't be dynamic.
+			response = RB.buildResponse(template, keys);
 			
 			//Print the next response
 			IO.print(response);
@@ -374,12 +379,13 @@ public class BatterBotDriver
 				ResponseTemplate response44 = new ResponseTemplate(sentence44, bucket44, keys44);
 				
 				
-				
-				String[] sentence45 = {"You shouldn't see this."};
+				String[] sentence45 = {"Ask away; I'll use my vast internal network to help you."};
 				String[][] bucket45 = null;
-				String[] keys45 = {"yahootest"};
-				ResponseTemplate response46 = new ResponseTemplate(sentence46, bucket46, keys46);
-				//response46.needsAnswer = true;
+				String[] keys45 = {"question"};
+				ResponseTemplate response45 = new ResponseTemplate(sentence45, bucket45, keys45);
+				//
+				
+				//response45.needsAnswer = true;
 				
 				
 				

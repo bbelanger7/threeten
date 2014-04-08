@@ -8,6 +8,8 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import org.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONTokener;
 
 /**
  * Given a Response Template as input, the Response Builder fills in the canned
@@ -113,11 +115,12 @@ public class ResponseBuilder implements ResponseBuilderInterface
 		return s;
 	}
 
-	public static String answerMeThis(String qball) throws IOException{
+	
+	public static String answerMeThis(String directQuestion) throws IOException{
 		String baseUrl = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20answers.search%20where%20query%3D%22";
 		String baseUrl2 = "%22%20and%20type%3D%22resolved%22&format=json&diagnostics=true&callback=";
-		qball = URLEncoder.encode(qball, "UTF-8");
-		String fullUrl = baseUrl + qball + baseUrl2;
+		directQuestion = URLEncoder.encode(directQuestion, "UTF-8");
+		String fullUrl = baseUrl + directQuestion + baseUrl2;
 		URL myUrl = new URL(fullUrl);
 
 		Exception e = null;
@@ -142,9 +145,9 @@ public class ResponseBuilder implements ResponseBuilderInterface
 		JSONObject results = query.getJSONObject("results");
 		JSONArray question = results.getJSONArray("Question");
 		JSONObject element = question.optJSONObject(0);
-		String yourPrayersHaveBeenAnswered = element.getString("ChosenAnswer");
+		String answer = element.getString("ChosenAnswer");
 		
-		return yourPrayersHaveBeenAnswered;
+		return answer;
 	}
 	/**
 	 * Method that takes a string and returns TRUE if it starts with #
