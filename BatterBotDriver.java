@@ -159,8 +159,10 @@ public class BatterBotDriver
     		}
 		}
 	}
-	
-	
+	/**
+	 *
+	 */
+	@SuppressWarnings(value = { "unused" })
 	public void setup()
 	{
 		//Response templates declared here.
@@ -439,7 +441,6 @@ public class BatterBotDriver
 				String[] keys44 = {"talk about?"};
 				
 				ResponseTemplate response44 = new ResponseTemplate(sentence44, bucket44, keys44);
-				
 				
 				String[] sentence45 = {"Ask away; I'll use my vast internal network to help you."};
 				String[][] bucket45 = null;

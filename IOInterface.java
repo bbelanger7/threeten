@@ -17,7 +17,7 @@ public interface IOInterface
 	
 	/**
 	 * Used to read the user input to the batterbot.
-	 * This method doesn't currently block but I wish it did.
+	 * This method doesn't currently block (in a normal sense) but I certainly wish it did.
 	 * @return Returns the next user input as a String.
 	 */
 	public String read();

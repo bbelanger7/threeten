@@ -1,12 +1,14 @@
 import java.awt.*;
-import javax.swing.*;
-import java.awt.event.*;
 
+import javax.swing.*;
+
+import java.awt.event.*;
 import java.io.IOException;
 
 import javax.sound.sampled.AudioFileFormat;
-import com.darkprograms.speech.microphone.*;
+import javax.sound.sampled.LineUnavailableException;
 
+import com.darkprograms.speech.microphone.*;
 import com.darkprograms.speech.recognizer.*;
 
 /**
@@ -126,12 +128,33 @@ public class IO extends JPanel implements IOInterface, ActionListener
     		{
     			//Debug
     			System.out.println("I'm listening.");
-    			//Start listening for user input; listen for 10 seconds.
-    			
+    			//Start listening for user input; listen for 5 seconds.
+    			//mic.open();
+    			try
+    			{
+    			mic.captureAudioToFile("temp.wav");
+    			}
+    			catch (LineUnavailableException x)
+    			{
+    				textFromGoogle = "The file didn't take.";
+    			}
+    			try
+        		{
+    	    		//Wait 10 seconds.  This is a bad hack- will the mic survive?
+    	    		Thread.sleep(5000);
+        		}
+        		catch(InterruptedException ex)
+        		{
+        			Thread.currentThread().interrupt();
+        			break;
+        		}
+    			mic.close();
     			//Send that file to Google and get a response, so long as Google takes no exception of course
     			try
     			{
-    			gR = rec.getRecognizedDataForWave("capture.wav");
+    			//gR = rec.getRecognizedDataForWave("capture.wav");
+    			//Now with less needing to save.
+    			gR = rec.getRecognizedDataForWave("temp.wav");
     			textFromGoogle = gR.getResponse();
     			}
     			catch (IOException e)
