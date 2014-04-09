@@ -13,70 +13,44 @@ import com.darkprograms.*;
  * 
  * @author Benjamin
  */
-public class IO extends JPanel implements IOInterface, ActionListener
+public class IOold extends JPanel implements IOInterface, ActionListener
 {
-	//Because Eclipse was complaining
+	/**
+	 * Because Eclipse was complaining
+	 */
 	private static final long serialVersionUID = 1L;
-	//private Scanner askUser = new Scanner(System.in);
+	/**
+	 * Variable to make the text field
+	 */
     protected JTextField textField;
-    protected JTextArea textArea;
-    private final static String newline = "\n";
-    private boolean clearToRead = false;
-    //private JPanel panel;
-    
-    //When I used the console, la di da
-    /*
-	public String read()
-    {
-        //askUser = new Scanner(System.in);
-        System.out.print("Enter your answer: ");
-        
-        String read = askUser.nextLine();
-        return read;
-    }
-	*/
     /**
-     * 
+	 * Variable to make the text area
+	 */
+    protected JTextArea textArea;
+    /**
+	 * Bookkeeping variable to make a new line quick
+	 */
+    private final static String newline = "\n";
+    /**
+	 * Variable that sets when the user presses enter so the reader knows to read then.
+	 */
+    private boolean clearToRead = false;
+    
+    /**
+     * A function that prints responses from the bot.
+     * @param A response string from the bot
      */
     public void print (String response)
     {
-    	//Old console code
-        //System.out.println("Bot: " + response + "\n");
-    	
     	//GUI code
     	textArea.append("Bot: " + response + newline);
     	textArea.setCaretPosition(textArea.getDocument().getLength());
     }
     
-     
-    /*
-    public IO()
-    {
-    	setLayout(new BorderLayout());
-    	panel = new JPanel();
-    	textField = new JTextField(20);
-    	textArea = new JTextArea(10, 20);
-    	textArea.setEditable(false);
-    	JScrollPane scrollPane = new JScrollPane(textArea);
-    	getContentPane().add(panel, BorderLayout.CENTER);
-    	getContentPane().add(textArea, BorderLayout.NORTH);
-    	getContentPane().add(textField, BorderLayout.SOUTH);
-    	getContentPane().add(scrollPane, BorderLayout.SOUTH);
-    	pack();
-    	setVisible(true);
-    	
-    	
-    }
-    
-    public void actionPerformed(ActionEvent e)
-    {
-    	String text = textField.getText();
-    	textArea.append(text + newline);
-    	textField.selectAll();
-    	textArea.setCaretPosition(textArea.getDocument().getLength());
-    }
-    */
-    public IO()
+    /**
+     * Constructor.
+     */
+    public IOold()
     {
     	super(new GridBagLayout());
     	textField = new JTextField(20);
@@ -132,18 +106,13 @@ public class IO extends JPanel implements IOInterface, ActionListener
     
     /**
      * Reads from the console when the user presses Enter.
+     * @return The string from the user- from the text field.
      */
     public String read()
     {
     	while(true) //Spin until we receive a signal from the event
     	{
     		System.out.println("");  //The console wants this for some reason
-    		//if (clearToRead == true)
-    		//{
-    		//	clearToRead = false;
-    		//	break;
-    		//I don't want this to run UNLESS it was called by actionperformed
-    		//return textField.getText();
     		if (clearToRead == true)
     			break;
     	}
