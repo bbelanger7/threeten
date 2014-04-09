@@ -48,7 +48,7 @@ public class BatterBotDriver
 		
 		while(true)
 		{
-			//This is expected to block waiting for input, but it doesn't because I don't understand how to semaphore.
+			//This should block waiting for input
 			input = IO.read();
 			//Need to declare this up here
 			String response = null;
@@ -102,43 +102,11 @@ public class BatterBotDriver
 					ansMode = true;
 					response = "You put me into Question Mode.  What's up?";
 				}
-				else  //OR	is it?
+				else  //OR is it?
 				{
 					response = RB.buildResponse(template, keys);
 				}
 			}
-
-			
-			//Old block
-			/*
-			//Decode the user input into keywords
-			KeyWordList keys = LP.extractKeyWords(input);
-			
-			if(template != null)
-				template.processResponse(input, keys);
-			
-			//Select the next response template
-			template = RS.selectTemplate(keys);
-			
-			String response = null;
-			
-			
-			//TODO: Let the system append a witty response after getting from the Wiki.
-			if(template.needsWiki)
-			{
-				response = RB.fromWiki(template);
-			}
-			
-			//If the response triggers the YAnswers mode:
-			else if(template.answerTrigger)
-			{
-				ansMode = true;
-			}
-			
-			//Build the response from template as normal; this will happen at all times.
-			//The bot should provide a commentary on the Wikipedia entry though it needn't be dynamic.
-			response = RB.buildResponse(template, keys);
-			*/  //END OF OLD BLOCK 
 			
 			//Print the next response
 			IO.print(response);
@@ -147,16 +115,18 @@ public class BatterBotDriver
 			if(template.isValediction())
 				break;
 			
+			System.out.println("Main waits.");
 			//Sleep for 3 seconds.
 			try
     		{
-	    		//Wait 3 seconds.  This is a bad hack- will it withstand the listener?
-	    		Thread.sleep(3000);
+	    		//Wait 1.5 seconds.
+	    		Thread.sleep(1500);
     		}
     		catch(InterruptedException ex)
     		{
     			Thread.currentThread().interrupt();
     		}
+			System.out.println("Main is now ready.");
 		}
 	}
 	/**

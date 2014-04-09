@@ -31,7 +31,7 @@ public class IO extends JPanel implements IOInterface, ActionListener
     private final static String newline = "\n";
     private boolean clearToRead = false;
     //For Google.
-    private boolean clearToHear = false;
+    private boolean clearToHear = true;
     private GoogleResponse gR = new GoogleResponse();
     private String textFromGoogle = "";
     private Recognizer rec = new Recognizer();
@@ -75,6 +75,7 @@ public class IO extends JPanel implements IOInterface, ActionListener
  
         //Add contents to the window.
         frame.add(this);
+        frame.setPreferredSize(new Dimension(1000,600));
  
         //Display the window.
         frame.pack();
@@ -95,9 +96,6 @@ public class IO extends JPanel implements IOInterface, ActionListener
     	//Unblock that reader
     	clearToRead = true;
     	
-    	//Unblock the Google
-    	clearToHear = true;
-    	
     	//Paste it to the history
         textArea.append("User: " + text + newline);
         
@@ -115,24 +113,17 @@ public class IO extends JPanel implements IOInterface, ActionListener
      */
     public String read()
     {
-    	//This only gets called once per loop, see.
-    	//So when we're called upon by the driver,
-    	clearToHear = true;
-    	
-    	//Make up a new Google system here
-    	
     	while(true) //Spin until we receive a signal from the event
     	{
-    		System.out.println("");  //The console wants this for some reason
+    		System.out.print("");  //The console wants this for some reason.  I don't know why.
     		if (clearToHear == true)
     		{
     			//Debug
     			System.out.println("I'm listening.");
     			//Start listening for user input; listen for 5 seconds.
-    			//mic.open();
     			try
     			{
-    			mic.captureAudioToFile("temp.wav");
+    				mic.captureAudioToFile("temp.wav");
     			}
     			catch (LineUnavailableException x)
     			{
@@ -140,33 +131,48 @@ public class IO extends JPanel implements IOInterface, ActionListener
     			}
     			try
         		{
-    	    		//Wait 10 seconds.  This is a bad hack- will the mic survive?
-    	    		Thread.sleep(5000);
+    	    		//Wait 4 seconds for the user to finish talking
+    	    		Thread.sleep(4000);
         		}
         		catch(InterruptedException ex)
         		{
         			Thread.currentThread().interrupt();
-        			break;
+        			System.out.println("My sleep was interrupted.");
         		}
     			mic.close();
+    			System.out.println("I'm done listening.");
+    			
     			//Send that file to Google and get a response, so long as Google takes no exception of course
     			try
     			{
-    			//gR = rec.getRecognizedDataForWave("capture.wav");
     			//Now with less needing to save.
+    			Thread.sleep(100);
     			gR = rec.getRecognizedDataForWave("temp.wav");
     			textFromGoogle = gR.getResponse();
+    			System.out.println(textFromGoogle);
     			}
     			catch (IOException e)
     			{
     			textFromGoogle = "Oops, something went wrong.";
     			}
+    			catch(InterruptedException ex)
+    			{
+    			Thread.currentThread().interrupt();
+    			}
     			
-    			//Replace 
-    			textField.setText(textFromGoogle);
+    			if (textFromGoogle == null)
+    			{
+    				System.out.println("Oops, I didn't understand that.  Try typing.");
+    			}
+    			else
+    			{
+    				//If Google understood what the user said, replace the text field with it.
+    				textField.setText(textFromGoogle);
+    			}
     			
     			//Don't repeat this more than once
     			clearToHear = false;
+    			System.out.println("Press Enter to continue.  Correct the text if it's wrong.");
     			
     		}
     		//Loop until the user presses Enter
@@ -174,6 +180,7 @@ public class IO extends JPanel implements IOInterface, ActionListener
     			break;
     	}
     	clearToRead = false;
+    	clearToHear = true;
     	return textField.getText();
     }
     
