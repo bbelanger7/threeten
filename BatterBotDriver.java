@@ -160,6 +160,8 @@ public class BatterBotDriver
 				String[] keys3 = {"who is robin"};
 				
 				ResponseTemplate response3 = new ResponseTemplate(sentence3, bucket3, keys3);
+				response3.needsWiki = true;
+				response3.wikiTerm = "Robin (comics)";
 				
 				String[] sentence4 = {"I cannot tell you my true identity.  It protects my friends from danger"};
 				String[][] bucket4 = null;
@@ -215,6 +217,9 @@ public class BatterBotDriver
 				
 				ResponseTemplate response12 = new ResponseTemplate(sentence12, bucket12, keys12);
 				
+				response12.needsWiki = true;
+				response12.wikiTerm = "Justice_League";
+				
 				String[] sentence13 = {"The core members of the Justice League are Myself, Superman, Wonder Woman, Green Lantern, Flash, and the Martian. They are my only friends"};
 				String[][] bucket13 = null;
 				String[] keys13 = {"in the justice league","in justice league","friends"};
@@ -227,23 +232,32 @@ public class BatterBotDriver
 				
 				ResponseTemplate response14 = new ResponseTemplate(sentence14, bucket14, keys14);
 				
+				response14.needsWiki = true;
+				response14.wikiTerm = "Green_Lantern";
+				
 				String[] sentence15 = {"Superman is the last know Kryptonian. He was sent to earth as a child, when his planet Krypton exploded. He values justice above all else and will defend the Earth, his new home.  Also he has so many powers...it's unfair :("};
 				String[][] bucket15 = null;
 				String[] keys15 = {"about superman","who is superman"};
 				
 				ResponseTemplate response15 = new ResponseTemplate(sentence15, bucket15, keys15);
+				response15.needsWiki = true;
+				response15.wikiTerm = "Superman";
 				
 				String[] sentence16 = {"Wonder Woman is an Amazonian.  She comes from a far away planet full of sexy women ;)"};
 				String[][] bucket16 = null;
 				String[] keys16 = {"about wonder woman","who is wonder woman"};
 				
 				ResponseTemplate response16 = new ResponseTemplate(sentence16, bucket16, keys16);
+				response16.needsWiki = true;
+				response16.wikiTerm = "Wonder_Woman";
 				
 				String[] sentence17 = {"The Flash is the fastest man on earth. He can run at supersonic speeds....unfortunately, the only thing faster than him is his mouth."};
 				String[][] bucket17 = null;
 				String[] keys17 = {"about flash","about the flash","who is flash","who is the flash"};
 				
 				ResponseTemplate response17 = new ResponseTemplate(sentence17, bucket17, keys17);
+				response17.needsWiki = true;
+				response17.wikiTerm = "The_Flash";
 				
 				String[] sentence18 = {"Seriously...he's a martian with superpowers. I thought that one was pretty self-explanatory"};
 				String[][] bucket18 = null;
@@ -292,6 +306,9 @@ public class BatterBotDriver
 				String[] keys25 = {"raz","al-gul","leader"};
 				
 				ResponseTemplate response25 = new ResponseTemplate(sentence25, bucket25, keys25);
+
+				response25.needsWiki = true;
+				response25.wikiTerm = "Ra's_al_Ghul";
 				
 				String[] sentence26 = {"The Lazarus pools are the source of the legend of the fountain of youth. They're one and the same, and Raz Al-Gul is the only person who knows how to use them."};
 				String[][] bucket26 = null;
@@ -308,18 +325,21 @@ public class BatterBotDriver
 				response27.needsWiki = true;
 				response27.wikiTerm = "Joker (comics)";
 				
-				
 				String[] sentence28 = {"Mr. Cobblepot, aka the Penguin, is a deranged, mutated man who blames the rest of the world for his misfortune. We have fought many times."};
 				String[][] bucket28 = null;
 				String[] keys28 = {"penguin", "cobblepot"};
 				
 				ResponseTemplate response28 = new ResponseTemplate(sentence28, bucket28, keys28);
+				response28.needsWiki = true;
+				response28.wikiTerm = "The_Penguin";
 				
 				String[] sentence29 = {"Born Harvery Dent, a former prosecutor, He developed a psychopathic obsession with duality after...I'd rather not talk about it"};
 				String[][] bucket29 = null;
 				String[] keys29 = {"two face","two-face"};
 				
 				ResponseTemplate response29 = new ResponseTemplate(sentence29, bucket29, keys29);
+				response29.needsWiki = true;
+				response29.wikiTerm = "Two_face";
 				
 				String[] sentence30 = {"I have many enemies. The joker, Raz Al-gul, the Penguin, and Two-Face are the enemies I encounter the most"};
 				String[][] bucket30 = null;
