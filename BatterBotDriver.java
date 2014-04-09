@@ -146,6 +146,17 @@ public class BatterBotDriver
 			//Checks if the response ends the conversation.
 			if(template.isValediction())
 				break;
+			
+			//Sleep for 3 seconds.
+			try
+    		{
+	    		//Wait 3 seconds.  This is a bad hack- will it withstand the listener?
+	    		Thread.sleep(3000);
+    		}
+    		catch(InterruptedException ex)
+    		{
+    			Thread.currentThread().interrupt();
+    		}
 		}
 	}
 	

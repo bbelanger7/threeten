@@ -1,10 +1,13 @@
 //import java.util.Scanner;
 import java.awt.*;
+
 import javax.swing.*;
+
 import java.awt.event.*;
+import java.io.IOException;
 
-import com.darkprograms.*;
-
+//import com.darkprograms.*;
+import com.darkprograms.speech.recognizer.*;
 
 /**
  * Implementation of the IO interface.
@@ -23,6 +26,14 @@ public class IO extends JPanel implements IOInterface, ActionListener
     protected JTextArea textArea;
     private final static String newline = "\n";
     private boolean clearToRead = false;
+    //For Google.
+    private boolean clearToHear = false;
+    //I don't need to make a new one of these every time
+    private GoogleResponse gR = new GoogleResponse();
+    private String textFromGoogle = "";
+    //I need a recognizer.
+    private Recognizer rec = new Recognizer();
+    
     
     
     //Just printing for now, the bot doesn't need to talk
@@ -80,6 +91,9 @@ public class IO extends JPanel implements IOInterface, ActionListener
     	//Unblock that reader
     	clearToRead = true;
     	
+    	//Unblock the Google
+    	clearToHear = true;
+    	
     	//Paste it to the history
         textArea.append("User: " + text + newline);
         
@@ -97,9 +111,43 @@ public class IO extends JPanel implements IOInterface, ActionListener
      */
     public String read()
     {
+    	//This only gets called once per loop, see.
+    	//So when we're called upon by the driver,
+    	clearToHear = true;
+    	
+    	//Make up a new Google system here
+    	
     	while(true) //Spin until we receive a signal from the event
     	{
     		System.out.println("");  //The console wants this for some reason
+    		if (clearToHear == true)
+    		{
+    			System.out.println("I'm listening.");
+    			//Start listening for user input
+    			
+    			//Listen for 10 seconds
+    			
+    			//Send to Google
+    			
+    			//Get response from Google, so long as Google takes no exception of course
+    			try
+    			{
+    			gR = rec.getRecognizedDataForWave("test.wav");
+    			textFromGoogle = gR.getResponse();
+    			}
+    			catch (IOException e)
+    			{
+    			textFromGoogle = "Oops, something went wrong.";
+    			}
+    			
+    			//Replace 
+    			textField.setText(textFromGoogle);
+    			
+    			//Don't repeat this more than once
+    			clearToHear = false;
+    			
+    		}
+    		//Loop until the user presses Enter
     		if (clearToRead == true)
     			break;
     	}
