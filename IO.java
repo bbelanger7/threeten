@@ -1,12 +1,12 @@
-//import java.util.Scanner;
 import java.awt.*;
-
 import javax.swing.*;
-
 import java.awt.event.*;
+
 import java.io.IOException;
 
-//import com.darkprograms.*;
+import javax.sound.sampled.AudioFileFormat;
+import com.darkprograms.speech.microphone.*;
+
 import com.darkprograms.speech.recognizer.*;
 
 /**
@@ -14,7 +14,9 @@ import com.darkprograms.speech.recognizer.*;
  * Most of the GUI code was adapted from here:
  * http://docs.oracle.com/javase/tutorial/uiswing/examples/components/TextDemoProject/src/components/TextDemo.java
  * 
- * And I used the darkprograms->Google speech recognizer.
+ * I used The-Shadow's java-speech-api for speech recognition.  
+ * It can be found here:
+ * https://github.com/The-Shadow/java-speech-api
  * 
  * @author Benjamin
  */
@@ -28,11 +30,11 @@ public class IO extends JPanel implements IOInterface, ActionListener
     private boolean clearToRead = false;
     //For Google.
     private boolean clearToHear = false;
-    //I don't need to make a new one of these every time
     private GoogleResponse gR = new GoogleResponse();
     private String textFromGoogle = "";
-    //I need a recognizer.
     private Recognizer rec = new Recognizer();
+    //Speech capture needs a class too
+    private Microphone mic = new Microphone(AudioFileFormat.Type.WAVE);
     
     
     
@@ -122,17 +124,14 @@ public class IO extends JPanel implements IOInterface, ActionListener
     		System.out.println("");  //The console wants this for some reason
     		if (clearToHear == true)
     		{
+    			//Debug
     			System.out.println("I'm listening.");
-    			//Start listening for user input
+    			//Start listening for user input; listen for 10 seconds.
     			
-    			//Listen for 10 seconds
-    			
-    			//Send to Google
-    			
-    			//Get response from Google, so long as Google takes no exception of course
+    			//Send that file to Google and get a response, so long as Google takes no exception of course
     			try
     			{
-    			gR = rec.getRecognizedDataForWave("test.wav");
+    			gR = rec.getRecognizedDataForWave("capture.wav");
     			textFromGoogle = gR.getResponse();
     			}
     			catch (IOException e)
