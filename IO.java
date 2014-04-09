@@ -149,7 +149,7 @@ public class IO extends JPanel implements IOInterface, ActionListener
     			Thread.sleep(100);
     			gR = rec.getRecognizedDataForWave("temp.wav");
     			textFromGoogle = gR.getResponse();
-    			System.out.println(textFromGoogle);
+    			//System.out.println(textFromGoogle);
     			}
     			catch (IOException e)
     			{
